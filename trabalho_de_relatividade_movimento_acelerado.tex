@@ -1,0 +1,593 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage[provide=*]{babel}
+\babelprovide[import, main]{portuguese}
+\babelprovide[import]{english}
+\babelfont{rm}{Noto Sans}
+\usepackage{enumitem}
+\setlist[itemize]{label=-}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\title{\textbf{Cinemática e Dinâmica do Movimento Acelerado na Relatividade Especial e Horizontes de Eventos}}
+\author{Trabalho de Introdução à Teoria da Relatividade \\ Autor: Yuri Florentino Kosfeld \\ Matrícula: 2022038503}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este trabalho desenvolve o formalismo cinemático e dinâmico do movimento acelerado no âmbito da Teoria da Relatividade Especial. Partindo do estudo de uma partícula submetida a uma força constante, introduzimos a descrição covariante por meio dos quadrivetores posição, velocidade, aceleração, momento e força. Demonstramos a invariância da aceleração própria sentida por um observador comovente e aplicamos esses resultados ao estudo de viagens interestelares relativísticas e à dinâmica de propulsão de foguetes com conversão de massa em energia. Por fim, expandimos a análise para o movimento hiperbólico uniformemente acelerado, deduzindo a métrica de Rindler, a formação do horizonte de eventos de um observador acelerado e sua conexão termodinâmica com o efeito Unruh-Davies e a radiação de Hawking-Bekenstein em buracos negros de Schwarzschild.
+\end{abstract}
+
+\section{Introdução}
+
+Existe um mito recorrente de que a Teoria da Relatividade Especial (TRE) lida exclusivamente com referenciais inerciais e movimentos retilíneos uniformes, sendo necessário recorrer à Relatividade Geral para descrever corpos acelerados. Na realidade, a métrica plana de Minkowski descreve perfeitamente o movimento de partículas aceleradas, desde que as leis de transformação e as derivadas temporais sejam formuladas em relação a referenciais inerciais ou parametrizadas pelo tempo próprio $\tau$ da partícula.
+
+Para construir essa descrição de forma rigorosa, utilizamos o formalismo de quadrivetores no espaço-tempo de Minkowski, cuja métrica em coordenadas cartesianas $(ct, x, y, z)$ adota a assinatura $(+, -, -, -)$:
+\begin{equation}
+ds^2 = c^2 d\tau^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2.
+\end{equation}
+Ao longo deste trabalho, desenvolveremos inicialmente todo o formalismo básico guiado pelos problemas fundamentais da apostila do curso (Questões 35 a 40 e o problema de propulsão relativística) e, na sequência, aprofundaremos o tema analisando a geometria espaço-temporal do movimento hiperbólico e a termodinâmica de horizontes.
+
+\section{Partícula Submetida a uma Força Constante (Questão 35)}
+
+Consideremos uma partícula de massa de repouso $m$, inicialmente em repouso na origem no instante $t = 0$, que passa a ser acelerada linearmente ao longo do eixo $x$ por uma força constante de módulo $F_0$.
+
+\subsection{Dependência Temporal do Momento Linear}
+
+Na mecânica relativística, a segunda lei de Newton preserva sua forma fundamental quando expressa em termos da taxa de variação temporal do momento linear tridimensional $p$:
+\begin{equation}
+F = \frac{dp}{dt}.
+\end{equation}
+Integrando diretamente ambos os lados da equação desde o instante inicial $t' = 0$ (onde $p(0) = 0$) até um instante genérico $t$:
+\begin{equation}
+\int_{0}^{p(t)} dp' = \int_{0}^{t} F_0 \, dt' \implies p(t) = F_0 t.
+\end{equation}
+Nota-se que a expressão para o momento linear $p(t) = F_0 t$ \textbf{não depende} de o tratamento ser clássico ou relativístico; a relação formal entre impulso da força constante e momento linear permanece idêntica em ambas as teorias. A diferença física reside na relação entre momento linear e velocidade.
+
+\subsection{Velocidade em Função do Tempo}
+
+Na Relatividade Especial, o momento linear relaciona-se com a velocidade $v(t)$ da partícula através do fator de Lorentz $\gamma = (1 - v^2/c^2)^{-1/2}$:
+\begin{equation}
+p = \gamma m v = \frac{m v}{\sqrt{1 - \frac{v^2}{c^2}}}.
+\end{equation}
+Igualando esta expressão ao resultado $p(t) = F_0 t$ e definindo $\beta(t) \equiv v(t)/c$, obtemos:
+\begin{equation}
+\frac{m c \beta}{\sqrt{1 - \beta^2}} = F_0 t \implies \frac{\beta}{\sqrt{1 - \beta^2}} = \frac{F_0 t}{m c}.
+\end{equation}
+Elevando ambos os membros ao quadrado para isolar $\beta$:
+\begin{align}
+\frac{\beta^2}{1 - \beta^2} &= \left(\frac{F_0 t}{m c}\right)^2 \nonumber \\
+\beta^2 &= \left(\frac{F_0 t}{m c}\right)^2 (1 - \beta^2) = \left(\frac{F_0 t}{m c}\right)^2 - \beta^2 \left(\frac{F_0 t}{m c}\right)^2 \nonumber \\
+\beta^2 \left[ 1 + \left(\frac{F_0 t}{m c}\right)^2 \right] &= \left(\frac{F_0 t}{m c}\right)^2.
+\end{align}
+Extraindo a raiz quadrada positiva (dado que $F_0 > 0$ e $t \ge 0$) e multiplicando por $c$, chegamos à expressão relativística para a velocidade em função do tempo:
+\begin{equation}
+v(t) = \frac{c \left(\frac{F_0 t}{m c}\right)}{\sqrt{1 + \left(\frac{F_0 t}{m c}\right)^2}}.
+\end{equation}
+
+\subsection{Análise dos Casos Limite e Comparação Clássica}
+
+Podemos verificar a consistência física da equação de $v(t)$ analisando dois regimes assintóticos:
+
+\begin{itemize}
+    \item \textbf{Limite de tempos curtos ($t \ll mc/F_0$):} Neste regime, o parâmetro adimensional $\epsilon \equiv \frac{F_0 t}{mc} \ll 1$. Aplicando a expansão binomial $(1 + \epsilon^2)^{-1/2} \approx 1 - \frac{1}{2}\epsilon^2 + \mathcal{O}(\epsilon^4)$, temos:
+    \begin{equation}
+    v(t) = c \epsilon (1 + \epsilon^2)^{-1/2} \approx c \left(\frac{F_0 t}{m c}\right) \left[ 1 - \frac{1}{2}\left(\frac{F_0 t}{m c}\right)^2 \right] \approx \frac{F_0}{m} t.
+    \end{equation}
+    Este resultado reproduz exatamente a previsão da mecânica newtoniana ($v_{\text{clássico}}(t) = (F_0/m)t$), onde a aceleração é constante e igual a $F_0/m$.
+
+    \item \textbf{Limite de tempos muito longos ($t \to \infty$):} Quando $t \gg mc/F_0$, o termo $(F_0 t / mc)^2 \gg 1$ domina o radicando no denominador. Colocando $(F_0 t / mc)$ em evidência no denominador:
+    \begin{equation}
+    \lim_{t \to \infty} v(t) = \lim_{t \to \infty} \frac{c \left(\frac{F_0 t}{m c}\right)}{\left(\frac{F_0 t}{m c}\right) \sqrt{\left(\frac{m c}{F_0 t}\right)^2 + 1}} = \lim_{t \to \infty} \frac{c}{\sqrt{0 + 1}} = c.
+    \end{equation}
+    Enquanto na física newtoniana a velocidade cresce indefinidamente ($\lim_{t \to \infty} v_{\text{clássico}}(t) = \infty$), violando o limite causal, no tratamento relativístico a velocidade aproxima-se assintoticamente da velocidade da luz $c$ no vácuo, sem jamais ultrapassá-la.
+\end{itemize}
+
+\section{Quadrivelocidade e Transformação de Velocidades (Questão 36)}
+
+Para descrever a cinemática de forma covariante sob mudanças de referencial inercial, definimos o quadrivetor posição (ou evento) como $\mathcal{R} \equiv [ct, x, y, z]$. O quadrivetor velocidade $\mathcal{U}$ é definido como a derivada de $\mathcal{R}$ em relação ao tempo próprio $\tau$ da partícula ($d\tau = dt/\gamma_v$):
+\begin{equation}
+\mathcal{U} \equiv \frac{d\mathcal{R}}{d\tau} = \gamma_v \frac{d\mathcal{R}}{dt} = [\gamma_v c, \gamma_v v_x, \gamma_v v_y, \gamma_v v_z],
+\end{equation}
+onde $\gamma_v \equiv (1 - v^2/c^2)^{-1/2}$ e $v^2 = v_x^2 + v_y^2 + v_z^2$. Em um segundo referencial inercial $S'$, que se move com velocidade constante $u$ ao longo do eixo $x$ em relação a $S$ (configuração padrão), a quadrivelocidade da mesma partícula é escrita como:
+\begin{equation}
+\mathcal{U}' = [\gamma_{v'} c, \gamma_{v'} v_x', \gamma_{v'} v_y', \gamma_{v'} v_z'], \quad \text{com} \quad \gamma_{v'} \equiv \left(1 - \frac{v'^2}{c^2}\right)^{-1/2}.
+\end{equation}
+
+\subsection{Transformação de Lorentz da Quadrivelocidade}
+
+Por definição, qualquer quadrivetor $\mathcal{A} = [A_t, A_x, A_y, A_z]$ transforma-se entre referenciais inerciais segundo a mesma matriz de transformação de Lorentz aplicável ao quadrivetor evento $\mathcal{R}$. Para passar do referencial $S'$ para o referencial $S$ (transformação inversa, substituindo $u \to -u$, ou seja, somando o movimento de arraste $+u$), a relação matricial é:
+\begin{equation}
+\begin{bmatrix} \gamma_v c \\ \gamma_v v_x \\ \gamma_v v_y \\ \gamma_v v_z \end{bmatrix} = 
+\begin{bmatrix} 
+\gamma_u & \gamma_u \beta_u & 0 & 0 \\ 
+\gamma_u \beta_u & \gamma_u & 0 & 0 \\ 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 & 1 
+\end{bmatrix}
+\begin{bmatrix} \gamma_{v'} c \\ \gamma_{v'} v_x' \\ \gamma_{v'} v_y' \\ \gamma_{v'} v_z' \end{bmatrix},
+\end{equation}
+onde $\beta_u \equiv u/c$ e $\gamma_u \equiv (1 - u^2/c^2)^{-1/2}$. Expandindo o produto matricial componente a componente, obtemos o sistema de equações:
+\begin{align}
+\gamma_v c &= \gamma_u \left( \gamma_{v'} c + \frac{u}{c} \gamma_{v'} v_x' \right), \label{eq:u0} \\
+\gamma_v v_x &= \gamma_u \left( \gamma_{v'} v_x' + \frac{u}{c} \gamma_{v'} c \right), \label{eq:ux} \\
+\gamma_v v_y &= \gamma_{v'} v_y', \label{eq:uy} \\
+\gamma_v v_z &= \gamma_{v'} v_z'. \label{eq:uz}
+\end{align}
+O grande poder do formalismo de quadrivetores reside justamente nesta propriedade: uma vez conhecida a lei de transformação das coordenadas diferenciais $d\mathcal{R}$ e sabendo que o elemento de tempo próprio $d\tau$ é um escalar invariante de Lorentz ($d\tau = d\tau'$), qualquer derivada de um quadrivetor em relação a $\tau$ herda automaticamente a estrutura linear da transformação de Lorentz.
+
+\subsection{Relação entre os Fatores de Lorentz}
+
+Tomando a componente temporal da transformação, dada pela Equação (\ref{eq:u0}), e colocando $\gamma_{v'} c$ em evidência no membro direito:
+\begin{equation}
+\gamma_v c = \gamma_u \gamma_{v'} c \left( 1 + \frac{u v_x'}{c^2} \right).
+\end{equation}
+Dividindo ambos os lados por $c \neq 0$, demonstramos imediatamente a identidade que relaciona os três fatores de Lorentz:
+\begin{equation}
+\gamma_v = \gamma_u \gamma_{v'} \left( 1 + \frac{u v_x'}{c^2} \right). \label{eq:gamma_rel}
+\end{equation}
+
+\subsection{Dedução da Lei de Adição de Velocidades}
+
+Para obter as componentes da velocidade tridimensional no referencial $S$ em função das componentes em $S'$, substituímos a expressão de $\gamma_v$ da Equação (\ref{eq:gamma_rel}) nas equações espaciais (\ref{eq:ux}) e (\ref{eq:uy}):
+
+\begin{itemize}
+    \item \textbf{Componente longitudinal ($v_x$):} Fatorando $\gamma_{v'}$ no lado direito da Equação (\ref{eq:ux}), temos $\gamma_v v_x = \gamma_u \gamma_{v'} (v_x' + u)$. Dividindo esta equação membro a membro pela Equação (\ref{eq:gamma_rel}):
+    \begin{equation}
+    v_x = \frac{\gamma_u \gamma_{v'} (v_x' + u)}{\gamma_u \gamma_{v'} \left( 1 + \frac{u v_x'}{c^2} \right)} \implies v_x = \frac{v_x' + u}{1 + \frac{u v_x'}{c^2}}.
+    \end{equation}
+
+    \item \textbf{Componente transversal ($v_y$):} Substituindo $\gamma_v$ da Equação (\ref{eq:gamma_rel}) diretamente na Equação (\ref{eq:uy}):
+    \begin{equation}
+    \gamma_u \gamma_{v'} \left( 1 + \frac{u v_x'}{c^2} \right) v_y = \gamma_{v'} v_y'.
+    \end{equation}
+    Cancelando o fator comum $\gamma_{v'}$ em ambos os lados e isolando $v_y$:
+    \begin{equation}
+    v_y = \frac{v_y'}{\gamma_u \left( 1 + \frac{u v_x'}{c^2} \right)}.
+    \end{equation}
+\end{itemize}
+De modo idêntico, para o eixo $z$, tem-se $v_z = \frac{v_z'}{\gamma_u (1 + u v_x'/c^2)}$. Nota-se que, devido à dilatação temporal ($\gamma_u$), as componentes transversais da velocidade também sofrem modificação ao mudarmos de referencial, ainda que o movimento relativo $u$ ocorra apenas na direção $x$.
+
+\section{Quadriaceleração e Aceleração Própria (Questões 37 e 38)}
+
+De maneira análoga à quadrivelocidade $\mathcal{U} \equiv d\mathcal{R}/d\tau$, definimos a \textbf{quadriaceleração} $\mathcal{A}$ como a derivada da quadrivelocidade em relação ao tempo próprio $\tau$:
+\begin{equation}
+\mathcal{A} \equiv \frac{d\mathcal{U}}{d\tau} = \gamma \frac{d\mathcal{U}}{dt}.
+\end{equation}
+
+\subsection{Propriedades Algébricas da Quadriaceleração Unidimensional (Questão 37)}
+
+Consideremos inicialmente o movimento unidimensional restrito ao eixo $x$, onde $\mathcal{U} = [\gamma c, \gamma v, 0, 0] = c [\gamma, \gamma \beta, 0, 0]$, com $\beta \equiv v/c$ e $\gamma \equiv (1 - \beta^2)^{-1/2}$.
+
+\subsubsection{Diferencial do Fator de Lorentz}
+Diferenciando $\gamma = (1 - \beta^2)^{-1/2}$ em relação a $\beta$ pela regra da cadeia:
+\begin{equation}
+\frac{d\gamma}{d\beta} = -\frac{1}{2} (1 - \beta^2)^{-3/2} (-2\beta) = \beta (1 - \beta^2)^{-3/2} = \left[ (1 - \beta^2)^{-1/2} \right]^3 \beta = \gamma^3 \beta.
+\end{equation}
+Portanto, na forma diferencial:
+\begin{equation}
+d\gamma = \gamma^3 \beta \, d\beta. \label{eq:dgamma}
+\end{equation}
+
+\subsubsection{Componentes da Quadriaceleração}
+Sabendo que a aceleração coordenada (observada no referencial $S$) é $a \equiv dv/dt = c \, d\beta/dt$, podemos calcular a derivada temporal de $\mathcal{U}$ usando a relação $d/d\tau = \gamma \, d/dt$:
+\begin{equation}
+\mathcal{A} = \frac{d\mathcal{U}}{d\tau} = \gamma \frac{d}{dt} \left( c [\gamma, \gamma \beta, 0, 0] \right) = \gamma c \left[ \frac{d\gamma}{dt}, \frac{d(\gamma \beta)}{dt}, 0, 0 \right].
+\end{equation}
+Usando a Equação (\ref{eq:dgamma}), temos para o primeiro termo:
+\begin{equation}
+\frac{d\gamma}{dt} = \gamma^3 \beta \frac{d\beta}{dt} = \gamma^3 \beta \frac{a}{c}.
+\end{equation}
+Para o segundo termo, aplicamos a regra do produto e a identidade $\gamma^2 \beta^2 + 1 = \gamma^2 (\beta^2 + 1 - \beta^2) = \gamma^2$:
+\begin{equation}
+\frac{d(\gamma \beta)}{dt} = \frac{d\gamma}{dt} \beta + \gamma \frac{d\beta}{dt} = \left( \gamma^3 \beta^2 + \gamma \right) \frac{d\beta}{dt} = \gamma (\gamma^2 \beta^2 + 1) \frac{a}{c} = \gamma (\gamma^2) \frac{a}{c} = \gamma^3 \frac{a}{c}.
+\end{equation}
+Substituindo ambos os resultados na expressão de $\mathcal{A}$:
+\begin{equation}
+\mathcal{A} = \gamma c \left[ \gamma^3 \beta \frac{a}{c}, \gamma^3 \frac{a}{c}, 0, 0 \right] \implies \mathcal{A} = \gamma^4 [\beta, 1, 0, 0] a. \label{eq:quad_a}
+\end{equation}
+
+\subsubsection{Norma Invariante da Quadriaceleração}
+Calculando o produto escalar de Minkowski de $\mathcal{A}$ consigo mesmo ($\mathcal{A}^2 \equiv \mathcal{A} \cdot \mathcal{A} = A_t^2 - A_x^2 - A_y^2 - A_z^2$):
+\begin{equation}
+\mathcal{A}^2 = (\gamma^4 \beta a)^2 - (\gamma^4 a)^2 - 0 - 0 = \gamma^8 a^2 (\beta^2 - 1).
+\end{equation}
+Como $\gamma = (1 - \beta^2)^{-1/2}$, temos $\beta^2 - 1 = -(1 - \beta^2) = -\gamma^{-2}$. Assim:
+\begin{equation}
+\mathcal{A}^2 = \gamma^8 a^2 (-\gamma^{-2}) = -\gamma^6 a^2 = -(\gamma^3 a)^2 < 0.
+\end{equation}
+O sinal negativo demonstra que a quadriaceleração é um quadrivetor \textbf{tipo espaço}, cuja norma invariante vale $|\mathcal{A}| = \sqrt{\mathcal{A} \cdot \mathcal{A}} = i \gamma^3 a$, definindo o escalar invariante $g \equiv \gamma^3 a$ (módulo da aceleração própria).
+
+\subsubsection{Ortogonalidade entre Quadrivelocidade e Quadriaceleração}
+No caso unidimensional, o produto escalar entre $\mathcal{U} = \gamma c [1, \beta, 0, 0]$ e $\mathcal{A} = \gamma^4 a [\beta, 1, 0, 0]$ resulta diretamente em:
+\begin{equation}
+\mathcal{U} \cdot \mathcal{A} = (\gamma c)(\gamma^4 \beta a) - (\gamma c \beta)(\gamma^4 a) = \gamma^5 c a (\beta - \beta) = 0.
+\end{equation}
+Para provar que este resultado vale em três dimensões arbitrárias, partimos da norma invariante da quadrivelocidade:
+\begin{equation}
+\mathcal{U} \cdot \mathcal{U} = \gamma^2 c^2 - \gamma^2 v^2 = \gamma^2 c^2 (1 - \beta^2) = c^2 = \text{constante}.
+\end{equation}
+Derivando ambos os membros em relação ao tempo próprio $\tau$:
+\begin{equation}
+\frac{d}{d\tau} (\mathcal{U} \cdot \mathcal{U}) = \frac{d\mathcal{U}}{d\tau} \cdot \mathcal{U} + \mathcal{U} \cdot \frac{d\mathcal{U}}{d\tau} = 2 (\mathcal{U} \cdot \mathcal{A}) = \frac{d(c^2)}{d\tau} = 0 \implies \mathcal{U} \cdot \mathcal{A} = 0.
+\end{equation}
+No referencial de repouso instantâneo da partícula ($S'$), onde $\vec{v}' = \vec{0}$ e $\gamma_{v'} = 1$, a quadrivelocidade reduz-se a $\mathcal{U}' = [c, 0, 0, 0]$. Para que $\mathcal{U}' \cdot \mathcal{A}' = c A_t' = 0$, a componente temporal da quadriaceleração deve anular-se ($A_t' = 0$), de modo que $\mathcal{A}' = [0, \vec{g}]$, confirmando geometricamente que $\mathcal{A}$ é sempre tipo espaço.
+
+\subsection{Interpretação Física da Aceleração Própria (Questão 38)}
+
+Analisemos agora a aceleração própria $g$ a partir da transformação de velocidades entre um referencial inercial $S$ (onde a partícula tem velocidade instantânea $v$ na direção $x$) e o referencial inercial comovente instantâneo $S'$ (que se move com velocidade constante $u = v$ em relação a $S$).
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Acréscimo finito de velocidade:} Se no referencial comovente $S'$ (onde a velocidade inicial da partícula é nula) a partícula sofre um acréscimo de velocidade $\Delta v'$ ao longo do eixo $x'$, sua nova velocidade $v + \Delta v$ observada em $S$ é obtida pela fórmula de adição de velocidades com $u = v$ e $v_x' = \Delta v'$:
+    \begin{equation}
+    v + \Delta v = \frac{\Delta v' + v}{1 + \frac{v \Delta v'}{c^2}}.
+    \end{equation}
+
+    \item \textbf{Limite infinitesimal:} Considerando um acréscimo infinitesimal ($\Delta v' \to dv'$ e $\Delta v \to dv$), podemos expandir o denominador em série binomial de primeira ordem, $(1 + \frac{v}{c^2} dv')^{-1} \approx 1 - \frac{v}{c^2} dv'$, e desprezar termos de segunda ordem $(dv')^2 \approx 0$:
+    \begin{align}
+    v + dv &\approx (v + dv') \left( 1 - \frac{v}{c^2} dv' \right) \nonumber \\
+    v + dv &\approx v - \frac{v^2}{c^2} dv' + dv' - \frac{v}{c^2} (dv')^2 \nonumber \\
+    v + dv &= v + \left( 1 - \frac{v^2}{c^2} \right) dv'.
+    \end{align}
+    Subtraindo $v$ de ambos os lados, concluímos que:
+    \begin{equation}
+    dv = \left( 1 - \frac{v^2}{c^2} \right) dv' = \gamma^{-2} dv'. \label{eq:dv_rel}
+    \end{equation}
+
+    \item \textbf{Relação com o tempo próprio:} No referencial $S'$ que acompanha momentaneamente a partícula ($v' = 0 \implies \gamma_{v'} = 1$), o intervalo de tempo $dt'$ medido pelos relógios de $S'$ coincide exatamente com o intervalo de tempo próprio $d\tau$ registrado pelo relógio da partícula ($dt' = d\tau$). Sendo $g$ a aceleração medida em $S'$ (aceleração sentida pela partícula), temos $dv' = g \, dt' = g \, d\tau$. Substituindo na Equação (\ref{eq:dv_rel}):
+    \begin{equation}
+    dv = \gamma^{-2} g \, d\tau.
+    \end{equation}
+
+    \item \textbf{Relação entre $a$ e $g$:} No referencial de laboratório $S$, o intervalo de tempo coordenado relaciona-se ao tempo próprio por $dt = \gamma \, d\tau$, ou seja, $d\tau / dt = \gamma^{-1}$. Logo, a aceleração coordenada $a = dv/dt$ observada em $S$ é:
+    \begin{equation}
+    a = \frac{dv}{dt} = \gamma^{-2} g \frac{d\tau}{dt} = \gamma^{-2} g (\gamma^{-1}) \implies a = \gamma^{-3} g \quad \text{ou} \quad g = \gamma^3 a.
+    \end{equation}
+\end{enumerate}
+Pelo Princípio da Equivalência, um observador no interior de uma nave com aceleração própria $g$ percebe um campo gravitacional aparente de intensidade $g$ apontando no sentido oposto ao da aceleração.
+
+\section{Dinâmica Covariante: Quadriforça (Questão 39)}
+
+O quadrimomento de uma partícula de massa $m$ é definido por $\mathcal{P} \equiv m \mathcal{U} = [\gamma m c, \gamma m \vec{v}] = [E/c, \vec{p}]$, cuja norma ao quadrado é invariante:
+\begin{equation}
+\mathcal{P}^2 \equiv \mathcal{P} \cdot \mathcal{P} = \frac{E^2}{c^2} - p^2 = m^2 c^2.
+\end{equation}
+Definimos a \textbf{quadriforça} (ou força de Minkowski) $\mathcal{F}$ como a taxa de variação do quadrimomento em relação ao tempo próprio $\tau$:
+\begin{equation}
+\mathcal{F} \equiv \frac{d\mathcal{P}}{d\tau}.
+\end{equation}
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Expressão em termos da potência e da força tridimensional:} Utilizando $d/d\tau = \gamma \, d/dt$ e substituindo $\mathcal{P} = [E/c, \vec{p}]$:
+    \begin{equation}
+    \mathcal{F} = \gamma \frac{d}{dt} \left[ \frac{E}{c}, \vec{p} \right] = \gamma \left[ \frac{1}{c} \frac{dE}{dt}, \frac{d\vec{p}}{dt} \right].
+    \end{equation}
+    Como a potência mecânica é definida por $P \equiv dE/dt$ e a força tridimensional por $\vec{F} \equiv d\vec{p}/dt$, obtemos imediatamente:
+    \begin{equation}
+    \mathcal{F} = \gamma \left[ \frac{P}{c}, \vec{F} \right].
+    \end{equation}
+
+    \item \textbf{Segunda Lei de Newton em forma quadrivetorial:} Para uma partícula de massa de repouso $m$ constante ($dm/d\tau = 0$), substituímos $\mathcal{P} = m \mathcal{U}$ na definição da quadriforça:
+    \begin{equation}
+    \mathcal{F} = \frac{d(m\mathcal{U})}{d\tau} = m \frac{d\mathcal{U}}{d\tau} \implies \mathcal{F} = m \mathcal{A}.
+    \end{equation}
+
+    \item \textbf{Ortogonalidade entre $\mathcal{F}$ e $\mathcal{P}$:} Derivando a relação de invariância da norma do quadrimomento $\mathcal{P} \cdot \mathcal{P} = m^2 c^2 = \text{constante}$ em relação a $\tau$:
+    \begin{equation}
+    \frac{d}{d\tau} (\mathcal{P} \cdot \mathcal{P}) = 2 \left( \frac{d\mathcal{P}}{d\tau} \cdot \mathcal{P} \right) = 2 (\mathcal{F} \cdot \mathcal{P}) = 0 \implies \mathcal{F} \cdot \mathcal{P} = 0.
+    \end{equation}
+    Como $\mathcal{P}$ é um quadrivetor tipo tempo ($\mathcal{P}^2 = m^2 c^2 > 0$), no referencial de repouso instantâneo da partícula temos $\mathcal{P}' = [mc, \vec{0}]$. A condição invariante $\mathcal{F}' \cdot \mathcal{P}' = 0$ impõe que a componente temporal de $\mathcal{F}'$ seja nula, resultando em $\mathcal{F}' = [0, \vec{F}']$, o que prova que $\mathcal{F}$ é um quadrivetor tipo espaço ($\mathcal{F}^2 < 0$).
+
+    \item \textbf{Ortogonalidade entre $\mathcal{F}$ e $\mathcal{U}$ e teorema da potência:} Como $\mathcal{P} = m\mathcal{U}$, a ortogonalidade $\mathcal{F} \cdot \mathcal{P} = m (\mathcal{F} \cdot \mathcal{U}) = 0$ implica diretamente que $\mathcal{F} \cdot \mathcal{U} = 0$. Calculando explicitamente este produto escalar usando $\mathcal{F} = \gamma [P/c, \vec{F}]$ e $\mathcal{U} = \gamma [c, \vec{v}]$:
+    \begin{equation}
+    \mathcal{F} \cdot \mathcal{U} = \left( \gamma \frac{P}{c} \right) (\gamma c) - (\gamma \vec{F}) \cdot (\gamma \vec{v}) = \gamma^2 (P - \vec{F} \cdot \vec{v}) = 0.
+    \end{equation}
+    Sendo $\gamma \ge 1 \neq 0$, concluímos que a expressão clássica para a potência mecânica permanece exata em qualquer regime relativístico:
+    \begin{equation}
+    P = \vec{F} \cdot \vec{v}.
+    \end{equation}
+\end{enumerate}
+
+\section{Aplicações: Viagens Interestelares e Propulsão Relativística}
+
+\subsection{Viagem Acelerada até Próxima Centauri (Questão 40)}
+
+Consideremos uma missão espacial partindo do repouso da Terra rumo à estrela Próxima Centauri, situada a uma distância $r = 4{,}3\text{ anos-luz}$. Para simular a gravidade terrestre e proporcionar conforto à tripulação, a nave mantém seus motores ligados gerando uma aceleração própria constante de módulo $g = 9{,}8\text{ m/s}^2$: na primeira metade do percurso ($x_1 = r/2$), a nave acelera com $+g$; na segunda metade ($x_2 = r/2$), inverte os propulsores e desacelera simetricamente com $-g$ até parar no destino.
+
+\subsubsection{Dedução das Equações para a Primeira Metade da Viagem}
+Durante a etapa de aceleração de $t' = 0$ até um instante $t_1$, sabemos pela Questão 37/38 que:
+\begin{equation}
+\frac{d(\gamma \beta)}{dt} = \gamma^3 \frac{d\beta}{dt} = \gamma^3 \frac{a}{c} = \frac{g}{c}.
+\end{equation}
+Integrando de $0$ a $t_1$ (com $\beta(0) = 0$):
+\begin{equation}
+\gamma \beta = \frac{\beta}{\sqrt{1 - \beta^2}} = \frac{g t_1}{c} \implies \beta(t_1) = \frac{1}{c} \frac{dx}{dt_1} = \frac{\frac{g t_1}{c}}{\sqrt{1 + \left(\frac{g t_1}{c}\right)^2}}. \label{eq:beta_t1}
+\end{equation}
+Integrando a velocidade $dx/dt_1 = c \beta(t_1)$ de $0$ até $t_1$ para obter a distância percorrida $x_1$:
+\begin{equation}
+x_1 = \int_{0}^{t_1} \frac{g t'}{\sqrt{1 + \left(\frac{g t'}{c}\right)^2}} \, dt' = \frac{c^2}{g} \left[ \sqrt{1 + \left(\frac{g t'}{c}\right)^2} \right]_{0}^{t_1} = \frac{c^2}{g} \left[ \sqrt{1 + \left(\frac{g t_1}{c}\right)^2} - 1 \right].
+\end{equation}
+Reorganizando para isolar $(g t_1 / c)$ em função de $x_1$:
+\begin{align}
+\frac{g x_1}{c^2} + 1 &= \sqrt{1 + \left(\frac{g t_1}{c}\right)^2} \nonumber \\
+\left(\frac{g x_1}{c^2}\right)^2 + 2 \left(\frac{g x_1}{c^2}\right) + 1 &= 1 + \left(\frac{g t_1}{c}\right)^2 \nonumber \\
+\frac{g t_1}{c} &= \sqrt{\left( 2 + \frac{g x_1}{c^2} \right) \frac{g x_1}{c^2}}. \label{eq:t1_x1}
+\end{align}
+Por sua vez, o tempo próprio $\tau_1$ transcorrido a bordo da nave na primeira metade é obtido integrando $d\tau = \gamma^{-1} dt' = \sqrt{1 - \beta^2} \, dt'$:
+\begin{equation}
+\tau_1 = \int_{0}^{t_1} \frac{dt'}{\sqrt{1 + \left(\frac{g t'}{c}\right)^2}} = \frac{c}{g} \operatorname{arcsenh}\left(\frac{g t_1}{c}\right). \label{eq:tau1_t1}
+\end{equation}
+
+\subsubsection{Tempo Total da Viagem Completa (Aceleração + Desaceleração)}
+Pela simetria entre a primeira metade (aceleração até $x_1 = r/2$) e a segunda metade (desaceleração ao longo dos outros $r/2$), o tempo total na Terra é $t = 2 t_1$ (logo $t_1 = t/2$) e o tempo total para os cosmonautas é $\tau = 2 \tau_1$ (logo $\tau_1 = \tau/2$). Fazendo as substituições $t_1 \to t/2$, $\tau_1 \to \tau/2$ e $x_1 \to r/2$ nas Equações (\ref{eq:t1_x1}) e (\ref{eq:tau1_t1}):
+\begin{equation}
+\frac{g (t/2)}{c} = \sqrt{\left( 2 + \frac{g r}{2 c^2} \right) \frac{g r}{2 c^2}} = \frac{1}{2} \sqrt{\left( 4 + \frac{g r}{c^2} \right) \frac{g r}{c^2}} \implies t = \frac{c}{g} \sqrt{\left( 4 + \frac{g r}{c^2} \right) \frac{g r}{c^2}},
+\end{equation}
+e para o tempo próprio total dos cosmonautas:
+\begin{equation}
+\frac{g (\tau/2)}{c} = \operatorname{arcsenh}\left(\frac{g t}{2 c}\right) \implies \tau = \frac{2c}{g} \operatorname{arcsenh}\left(\frac{g t}{2 c}\right).
+\end{equation}
+
+\subsubsection{Cálculo Numérico}
+Trabalhando em unidades astronômicas onde a distância é medida em anos-luz ($\text{al}$) e o tempo em anos ($\text{ano}$), temos $c = 1\text{ al/ano}$. Convertendo a aceleração $g = 9{,}8\text{ m/s}^2$ para essas unidades (com $1\text{ ano} \approx 3{,}15576 \times 10^7\text{ s}$ e $c \approx 2{,}99792 \times 10^8\text{ m/s}$):
+\begin{equation}
+\frac{g}{c} = \frac{9{,}8\text{ m/s}^2}{2{,}99792 \times 10^8\text{ m/s}} \times (3{,}15576 \times 10^7\text{ s/ano}) \approx 1{,}0316\text{ ano}^{-1}.
+\end{equation}
+Portanto, $c/g \approx 0{,}9694\text{ anos}$ e o fator adimensional vale $\frac{g r}{c^2} = 1{,}0316 \times 4{,}3 \approx 4{,}4359$. Substituindo nas fórmulas deduzidas:
+\begin{itemize}
+    \item \textbf{Duração para quem ficou na Terra ($t$):}
+    \begin{equation}
+    t = 0{,}9694 \sqrt{(4 + 4{,}4359) \times 4{,}4359} = 0{,}9694 \sqrt{37{,}4208} \approx 5{,}93\text{ anos}.
+    \end{equation}
+    \item \textbf{Duração para os cosmonautas ($\tau$):}
+    \begin{equation}
+    \tau = 2 \times 0{,}9694 \times \operatorname{arcsenh}\left(\frac{1{,}0316 \times 5{,}93}{2}\right) = 1{,}9388 \times \operatorname{arcsenh}(3{,}0587) \approx 3{,}56\text{ anos}.
+    \end{equation}
+\end{itemize}
+Graças à dilatação do tempo, os cosmonautas chegam a Próxima Centauri em apenas $3{,}56\text{ anos}$ de seu tempo biológico, enquanto na Terra passam-se quase $6\text{ anos}$.
+
+\subsection{Propulsão Relativística de uma Nave (Problema Extra 1)}
+
+Analisemos agora o mecanismo físico de propulsão de um foguete relativístico no seu referencial de repouso instantâneo. No instante $\tau$, a nave possui massa total $M$ e está instantaneamente em repouso. Após um pequeno intervalo de tempo próprio $\Delta \tau$, ela consome uma massa de combustível $|\Delta M| = \mu \Delta \tau$ (onde $\mu = |dM/d\tau|$ é a taxa de consumo). Uma fração $\epsilon \le 1$ dessa massa é convertida em energia, e a massa residual $(1 - \epsilon) \mu \Delta \tau$ é ejetada para trás, impulsionando a nave de massa restante $M - \mu \Delta \tau$ para a frente com velocidade $\Delta v = g \Delta \tau$.
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Quadrimomentos do sistema:}
+    \begin{itemize}
+        \item \textbf{Antes ($\tau$):} A nave de massa $M$ encontra-se em repouso ($\vec{v} = \vec{0}, \gamma = 1$), logo seu quadrimomento inicial é:
+        \begin{equation}
+        \mathcal{P}_0 = [M c, 0, 0, 0].
+        \end{equation}
+        \item \textbf{Depois ($\tau + \Delta \tau$):} A nave tem massa $M - \mu \Delta \tau$ e velocidade $v = g \Delta \tau$ ao longo do eixo $x$. Como $\mathcal{P}_1 = [\gamma m_1 c, \gamma m_1 v, 0, 0]$, temos:
+        \begin{equation}
+        \mathcal{P}_1 = [\gamma (M - \mu \Delta \tau) c, \gamma (M - \mu \Delta \tau) g \Delta \tau, 0, 0],
+        \end{equation}
+        onde, para $\Delta \tau$ pequeno, $\gamma = \left[ 1 - (g \Delta \tau / c)^2 \right]^{-1/2} \approx 1 + \frac{1}{2} \left( \frac{g \Delta \tau}{c} \right)^2$.
+        \item \textbf{Produtos ejetados ($\mathcal{P}_2$):} Os gases/radiação ejetados para trás possuem quadrimomento $\mathcal{P}_2 = [E_2/c, p_2, 0, 0]$ e massa de repouso $m_2 = (1 - \epsilon)\mu \Delta \tau$. Pela relação de dispersão relativística ($\mathcal{P}_2^2 = m_2^2 c^2$), $E_2$ e $p_2$ relacionam-se com a massa ejetada por:
+        \begin{equation}
+        \frac{E_2^2}{c^2} - p_2^2 = \left[ (1 - \epsilon) \mu \Delta \tau \right]^2 c^2. \label{eq:disp_p2}
+        \end{equation}
+    \end{itemize}
+
+    \item \textbf{Conservação do quadrimomento:} Na ausência de forças externas sobre o sistema (nave + propelente), o quadrimomento total se conserva:
+    \begin{equation}
+    \mathcal{P}_0 = \mathcal{P}_1 + \mathcal{P}_2.
+    \end{equation}
+    Esta única equação vetorial tetradimensional sintetiza simultaneamente dois princípios fundamentais: a componente temporal expressa a \textbf{conservação da energia relativística total} (incluindo a energia de repouso convertida), enquanto as componentes espaciais expressam a \textbf{conservação do momento linear}.
+
+    \item \textbf{Eliminação de $E_2$ e $p_2$ e cálculo de $\gamma$:} Isolando $\mathcal{P}_2$ na equação de conservação e elevando ambos os membros ao quadrado (produto escalar de Minkowski):
+    \begin{equation}
+    (\mathcal{P}_0 - \mathcal{P}_1)^2 = \mathcal{P}_2^2 \implies \mathcal{P}_0^2 - 2 (\mathcal{P}_0 \cdot \mathcal{P}_1) + \mathcal{P}_1^2 = \mathcal{P}_2^2.
+    \end{equation}
+    Calculamos cada termo individualmente:
+    \begin{align}
+    \mathcal{P}_0^2 &= M^2 c^2, \nonumber \\
+    \mathcal{P}_1^2 &= (M - \mu \Delta \tau)^2 c^2 \quad \text{(norma invariante do quadrimomento da nave)}, \nonumber \\
+    \mathcal{P}_2^2 &= (1 - \epsilon)^2 \mu^2 \Delta \tau^2 c^2 \quad \text{(pela Equação \ref{eq:disp_p2})}, \nonumber \\
+    \mathcal{P}_0 \cdot \mathcal{P}_1 &= (Mc) [\gamma (M - \mu \Delta \tau) c] - 0 = \gamma M (M - \mu \Delta \tau) c^2.
+    \end{align}
+    Substituindo esses quatro resultados na igualdade e dividindo toda a equação por $M^2 c^2$:
+    \begin{equation}
+    1 - 2 \gamma \left( 1 - \frac{\mu \Delta \tau}{M} \right) + \left( 1 - \frac{\mu \Delta \tau}{M} \right)^2 = (1 - \epsilon)^2 \left( \frac{\mu \Delta \tau}{M} \right)^2.
+    \end{equation}
+    Definindo $u \equiv \frac{\mu \Delta \tau}{M}$ para simplificar a álgebra e expandindo os quadrados:
+    \begin{align}
+    1 - 2 \gamma (1 - u) + (1 - 2u + u^2) &= (1 - 2\epsilon + \epsilon^2) u^2 \nonumber \\
+    2 - 2u + u^2 - (1 - 2\epsilon + \epsilon^2) u^2 &= 2 \gamma (1 - u) \nonumber \\
+    2 (1 - u) + (2\epsilon - \epsilon^2) u^2 &= 2 \gamma (1 - u).
+    \end{align}
+    Dividindo ambos os lados por $2(1 - u)$ e notando que $\frac{2\epsilon - \epsilon^2}{2} = \epsilon \left(1 - \frac{\epsilon}{2}\right)$, demonstramos o resultado:
+    \begin{equation}
+    \gamma = \frac{1 - \left(\frac{\mu \Delta \tau}{M}\right) + \epsilon \left(1 - \frac{\epsilon}{2}\right) \left(\frac{\mu \Delta \tau}{M}\right)^2}{1 - \left(\frac{\mu \Delta \tau}{M}\right)}.
+    \end{equation}
+
+    \item \textbf{Dedução da aceleração própria da nave ($g$):} Separando a fração acima e mantendo termos até segunda ordem em $(\mu \Delta \tau / M)$ (já que $\frac{1}{1 - u} = 1 + u + \dots$, o termo quadrático multiplicado por $1/(1-u)$ mantém-se de segunda ordem apenas quando multiplicado por $1$):
+    \begin{equation}
+    \gamma = 1 + \frac{\epsilon \left(1 - \frac{\epsilon}{2}\right) \left(\frac{\mu \Delta \tau}{M}\right)^2}{1 - \left(\frac{\mu \Delta \tau}{M}\right)} \approx 1 + \frac{(2 - \epsilon)\epsilon}{2} \left( \frac{\mu \Delta \tau}{M} \right)^2.
+    \end{equation}
+    Igualando esta expansão à expansão cinemática $\gamma \approx 1 + \frac{1}{2} \left( \frac{g \Delta \tau}{c} \right)^2$ obtida no item (a):
+    \begin{equation}
+    1 + \frac{1}{2} \left( \frac{g \Delta \tau}{c} \right)^2 = 1 + \frac{(2 - \epsilon)\epsilon}{2} \left( \frac{\mu \Delta \tau}{M} \right)^2 \implies \left( \frac{g \Delta \tau}{c} \right)^2 = (2 - \epsilon)\epsilon \left( \frac{\mu \Delta \tau}{M} \right)^2.
+    \end{equation}
+    Extraindo a raiz quadrada e cancelando $\Delta \tau$, obtemos a equação fundamental do empuxo relativístico:
+    \begin{equation}
+    g = c \sqrt{(2 - \epsilon)\epsilon} \, \frac{\mu}{M}. \label{eq:g_propulsao}
+    \end{equation}
+
+    \item \textbf{Limite diferencial ($\Delta \tau \to 0$) e equações de movimento:} No limite $\Delta \tau \to 0$, a taxa de perda de massa é $\mu = -dM/d\tau$. Substituindo $\mu = -dM/d\tau$ na Equação (\ref{eq:g_propulsao}):
+    \begin{equation}
+    g(\tau) = -c \sqrt{(2 - \epsilon)\epsilon} \, \frac{1}{M} \frac{dM}{d\tau}. \label{eq:ed_foguete}
+    \end{equation}
+    Podemos integrar esta equação diferencial sob duas hipóteses operacionais distintas:
+    \begin{itemize}
+        \item \textbf{Caso 1 — Aceleração própria $g$ mantida constante:} Para que os tripulantes sintam $g = \text{constante}$, a Equação (\ref{eq:ed_foguete}) exige que $\frac{1}{M}\frac{dM}{d\tau} = -\frac{g}{c\sqrt{(2-\epsilon)\epsilon}} = \text{constante}$. Integrando de $\tau' = 0$ (massa inicial $M_0$) até $\tau$:
+        \begin{equation}
+        \int_{M_0}^{M(\tau)} \frac{dM'}{M'} = -\frac{g}{c \sqrt{(2 - \epsilon)\epsilon}} \int_{0}^{\tau} d\tau' \implies M(\tau) = M_0 \exp\left( -\frac{g \tau}{c \sqrt{(2 - \epsilon)\epsilon}} \right).
+        \end{equation}
+        Assim, a massa da nave e a taxa de queima de combustível $\mu(\tau) = -dM/d\tau$ devem decair exponencialmente com o tempo próprio $\tau$.
+
+        \item \textbf{Caso 2 — Equação de Tsiolkovsky Relativística (velocidade final em função da razão de massas):} Sabendo da Questão 38 que $dv / (1 - v^2/c^2) = c \, d\beta / (1 - \beta^2) = g \, d\tau$, substituímos $g \, d\tau$ diretamente pela Equação (\ref{eq:ed_foguete}):
+        \begin{equation}
+        \frac{d\beta}{1 - \beta^2} = -\sqrt{(2 - \epsilon)\epsilon} \, \frac{dM}{M}.
+        \end{equation}
+        Integrando de $\beta = 0$ ($M = M_0$) até uma velocidade final $\beta_f$ ($M = M_f$) e lembrando que $\int \frac{d\beta}{1-\beta^2} = \operatorname{arctanh}(\beta)$:
+        \begin{equation}
+        \operatorname{arctanh}(\beta_f) = \sqrt{(2 - \epsilon)\epsilon} \ln\left(\frac{M_0}{M_f}\right) \implies v_f = c \tanh\left[ \sqrt{(2 - \epsilon)\epsilon} \ln\left(\frac{M_0}{M_f}\right) \right].
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+
+\section{Desenvolvimento do Tema: Movimento Hiperbólico, Métrica de Rindler e Efeito Unruh}
+
+Para aprofundar o estudo do movimento acelerado, passamos agora ao desenvolvimento completo dos dois problemas suplementares propostos: a geometria da trajetória com aceleração própria constante (movimento hiperbólico) e o surgimento de horizontes termodinâmicos para observadores acelerados.
+
+\subsection{Movimento com Aceleração Própria Constante (Problema Extra 2)}
+
+Consideremos uma nave com aceleração própria constante $g = \gamma^3 dv/dt$, sujeita às condições iniciais $\tau_0 = t_0 = 0$, $v(0) = 0$ e posição inicial $x_0 = c^2/g$ no referencial inercial $S$.
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Relações para $\beta(\tau)$ e $\gamma(\tau)$:} Na Questão 38, demonstramos que $dv = \gamma^{-2} g \, d\tau$, o que equivale a $c \, d\beta = (1 - \beta^2) g \, d\tau$. Separando as variáveis e integrando desde $\tau' = 0$ ($\beta = 0$) até $\tau$:
+    \begin{equation}
+    \int_{0}^{\beta} \frac{d\beta'}{1 - \beta'^2} = \int_{0}^{\tau} \frac{g}{c} \, d\tau' \implies \operatorname{arctanh}(\beta) = \frac{g \tau}{c} \implies \beta(\tau) = \tanh\left(\frac{g \tau}{c}\right).
+    \end{equation}
+    Usando a identidade hiperbólica fundamental $\cosh^2(\xi) - \operatorname{senh}^2(\xi) = 1 \implies 1 - \tanh^2(\xi) = \cosh^{-2}(\xi)$, calculamos o fator de Lorentz $\gamma$:
+    \begin{equation}
+    \gamma(\tau) = \frac{1}{\sqrt{1 - \beta^2}} = \frac{1}{\sqrt{1 - \tanh^2\left(\frac{g \tau}{c}\right)}} = \cosh\left(\frac{g \tau}{c}\right).
+    \end{equation}
+
+    \item \textbf{Relação entre $(gt/c)$ e $(g\tau/c)$:} Sabendo que $dt = \gamma \, d\tau = \cosh(g\tau/c) \, d\tau$, integramos ambos os lados de $0$ a $\tau$ (com $t_0 = 0$):
+    \begin{equation}
+    t = \int_{0}^{\tau} \cosh\left(\frac{g \tau'}{c}\right) d\tau' = \frac{c}{g} \operatorname{senh}\left(\frac{g \tau}{c}\right) \implies \frac{g t}{c} = \operatorname{senh}\left(\frac{g \tau}{c}\right). \label{eq:gt_senh}
+    \end{equation}
+
+    \item \textbf{Relação entre $(gx/c^2)$ e $(g\tau/c)$:} Sabendo que $dx/d\tau = \gamma v = c \gamma \beta = c \cosh(g\tau/c) \tanh(g\tau/c) = c \operatorname{senh}(g\tau/c)$, integramos de $\tau' = 0$ (onde $x_0 = c^2/g$) até $\tau$:
+    \begin{equation}
+    \int_{x_0}^{x} dx' = c \int_{0}^{\tau} \operatorname{senh}\left(\frac{g \tau'}{c}\right) d\tau' \implies x - \frac{c^2}{g} = \frac{c^2}{g} \left[ \cosh\left(\frac{g \tau}{c}\right) - 1 \right].
+    \end{equation}
+    Somando $c^2/g$ em ambos os lados e multiplicando por $g/c^2$, obtemos:
+    \begin{equation}
+    x(\tau) = \frac{c^2}{g} \cosh\left(\frac{g \tau}{c}\right) \implies \frac{g x}{c^2} = \cosh\left(\frac{g \tau}{c}\right). \label{eq:gx_cosh}
+    \end{equation}
+
+    \item \textbf{Intervalo espaço-temporal da trajetória hiperbólica:} Calculando o intervalo $s^2 = c^2 t^2 - x^2$ entre a origem $(ct = 0, x = 0)$ e um evento qualquer $(ct(\tau), x(\tau))$ na linha de mundo da nave:
+    \begin{equation}
+    s^2 = c^2 t^2 - x^2 = \left(\frac{c^2}{g}\right)^2 \operatorname{senh}^2\left(\frac{g \tau}{c}\right) - \left(\frac{c^2}{g}\right)^2 \cosh^2\left(\frac{g \tau}{c}\right) = -\frac{c^4}{g^2}.
+    \end{equation}
+    Isso prova que a linha de existência da nave no diagrama espaço-tempo é uma hipérbole de equação $x^2 - c^2 t^2 = (c^2/g)^2$, razão pela qual esse movimento é denominado \textbf{movimento hiperbólico}. Além disso, como $s^2 = -c^4/g^2 < 0$ para todo $\tau$, o intervalo entre o evento na origem $(0,0)$ e qualquer evento na nave é sempre \textbf{tipo espaço} (nenhum sinal luminoso emitido da origem em $t=0$ jamais alcança a nave).
+
+    \item \textbf{Fechamento das relações algébricas:} A partir da equação da hipérbole $(gx/c^2)^2 - (gt/c)^2 = 1$, isolamos cada termo e combinamos com as Equações (\ref{eq:gt_senh}) e (\ref{eq:gx_cosh}):
+    \begin{align}
+    \frac{g t}{c} &= \operatorname{senh}\left(\frac{g \tau}{c}\right) = \pm \sqrt{\left(\frac{g x}{c^2}\right)^2 - 1}, \\
+    \frac{g x}{c^2} &= \cosh\left(\frac{g \tau}{c}\right) = \sqrt{\left(\frac{g t}{c}\right)^2 + 1}.
+    \end{align}
+\end{enumerate}
+
+\subsection{Métrica de Rindler, Efeito Unruh e Temperatura de Hawking (Problema Extra 3)}
+
+A parametrização hiperbólica obtida acima sugere a introdução de um sistema de coordenadas $(\tau, \sigma)$ adaptado a uma família de observadores acelerados (coordenadas de Rindler):
+\begin{equation}
+\begin{cases}
+ct = \sigma \operatorname{senh}\left(\frac{g \tau}{c}\right), \\
+x = \sigma \cosh\left(\frac{g \tau}{c}\right),
+\end{cases}
+\end{equation}
+onde a nave considerada anteriormente ocupa a coordenada espacial fixa $\sigma = c^2/g$.
+
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Dedução da Métrica de Rindler:} Calculando as diferenciais totais $d(ct)$ e $dx$ em função de $d\tau$ e $d\sigma$:
+    \begin{align}
+    c \, dt &= \operatorname{senh}\left(\frac{g \tau}{c}\right) d\sigma + \frac{g \sigma}{c} \cosh\left(\frac{g \tau}{c}\right) d\tau, \\
+    dx &= \cosh\left(\frac{g \tau}{c}\right) d\sigma + \frac{g \sigma}{c} \operatorname{senh}\left(\frac{g \tau}{c}\right) d\tau.
+    \end{align}
+    Elevando ambas ao quadrado e subtraindo $dx^2$ de $c^2 dt^2$ (note que os termos cruzados em $d\sigma d\tau$ são idênticos e se cancelam exatamente):
+    \begin{align}
+    c^2 dt^2 - dx^2 &= \left[ \operatorname{senh}^2\left(\frac{g \tau}{c}\right) - \cosh^2\left(\frac{g \tau}{c}\right) \right] d\sigma^2 + \left(\frac{g \sigma}{c}\right)^2 \left[ \cosh^2\left(\frac{g \tau}{c}\right) - \operatorname{senh}^2\left(\frac{g \tau}{c}\right) \right] d\tau^2 \nonumber \\
+    c^2 dt^2 - dx^2 &= -d\sigma^2 + \left(\frac{g \sigma}{c^2}\right)^2 c^2 d\tau^2.
+    \end{align}
+    Substituindo na métrica de Minkowski $ds^2 = c^2 dt^2 - dx^2 - dx_\perp^2$, obtemos a \textbf{métrica de Rindler}:
+    \begin{equation}
+    ds^2 = \left(\frac{g \sigma}{c^2}\right)^2 c^2 d\tau^2 - d\sigma^2 - dx_\perp^2. \label{eq:rindler_sigma}
+    \end{equation}
+
+    \item \textbf{Mudança para a coordenada $l$ e forma padrão da métrica:} Desejamos reescrever a métrica de Rindler (\ref{eq:rindler_sigma}) na forma canônica do enunciado (onde o tempo coordenado do observador acelerado é $\tau$):
+    \begin{equation}
+    ds^2 = f(l) c^2 d\tau^2 - \frac{dl^2}{f(l)} - dx_\perp^2.
+    \end{equation}
+    Comparando os coeficientes de $c^2 d\tau^2$ e a parte espacial radial nas duas expressões, devemos satisfazer simultaneamente:
+    \begin{equation}
+    f(l) = \left(\frac{g \sigma}{c^2}\right)^2 \quad \text{e} \quad \frac{dl^2}{f(l)} = d\sigma^2 \implies \frac{dl}{\sqrt{f(l)}} = d\sigma.
+    \end{equation}
+    Substituindo $\sqrt{f(l)} = \frac{g \sigma}{c^2}$ na relação diferencial:
+    \begin{equation}
+    dl = \frac{g \sigma}{c^2} \, d\sigma \implies l = \int_{0}^{\sigma} \frac{g \sigma'}{c^2} \, d\sigma' = \frac{g}{2 c^2} \sigma^2 \implies \sigma = c \sqrt{\frac{2 l}{g}}.
+    \end{equation}
+    Substituindo $\sigma^2 = \frac{2 c^2 l}{g}$ de volta em $f(l)$, demonstramos que:
+    \begin{equation}
+    f(l) = \frac{g^2}{c^4} \left( \frac{2 c^2 l}{g} \right) = \frac{2 g l}{c^2}.
+    \end{equation}
+
+    \item \textbf{Horizonte de Rindler e Temperatura de Unruh-Davies:} Na trajetória hiperbólica $x = \sqrt{c^2 t^2 + (c^2/g)^2} > |ct|$, a linha de mundo da nave tem como assíntota futura a reta luminosa $x = ct$ (que corresponde a $\sigma = 0$). Qualquer evento situado na região $ct \ge x$ jamais poderá enviar um sinal de luz capaz de interceptar a hipérbole da nave. Essa fronteira tipo luz ($x = ct$, ou $\sigma = 0$) constitui o \textbf{horizonte de Rindler}.
+
+    Pela definição do horizonte $f(l_0) \equiv 0$, temos:
+    \begin{equation}
+    f(l_0) = \frac{2 g l_0}{c^2} = 0 \implies l_0 = 0.
+    \end{equation}
+    A derivada de $f(l)$ avaliada no horizonte $l = l_0 = 0$ é constante e vale:
+    \begin{equation}
+    \left. \frac{df}{dl} \right|_{l=l_0} = \frac{2g}{c^2}.
+    \end{equation}
+    Aplicando a fórmula quântica da temperatura de horizonte fornecida no enunciado:
+    \begin{equation}
+    k_B T = \frac{\hbar c}{4\pi} \left. \frac{df}{dl} \right|_{l=l_0} = \frac{\hbar c}{4\pi} \left( \frac{2g}{c^2} \right) \implies k_B T = \frac{\hbar g}{2\pi c}.
+    \end{equation}
+    Portanto, enquanto um observador inercial vê o estado de vácuo quântico a $T = 0$, um observador com aceleração própria constante $g$ percebe um banho térmico de radiação de corpo negro à temperatura $T = \frac{\hbar g}{2\pi k_B c}$ (\textbf{efeito Unruh-Davies}).
+
+    \item \textbf{Horizonte de Eventos de Schwarzschild e Temperatura de Hawking-Bekenstein:} Consideremos agora a métrica de Schwarzschild para o espaço-tempo ao redor de um buraco negro esférico de massa $M$:
+    \begin{equation}
+    ds^2 = \left( 1 - \frac{r_S}{r} \right) c^2 dt^2 - \left( 1 - \frac{r_S}{r} \right)^{-1} dr^2 - dx_\perp^2, \quad \text{com} \quad r_S \equiv \frac{2GM}{c^2}.
+    \end{equation}
+    Comparando diretamente com a estrutura $ds^2 = f(r) c^2 dt^2 - dr^2/f(r) - dx_\perp^2$, identificamos a função métrica:
+    \begin{equation}
+    f(r) = 1 - \frac{r_S}{r} = 1 - \frac{2GM}{c^2 r}.
+    \end{equation}
+    O \textbf{horizonte de eventos} do buraco negro ocorre na coordenada radial $r = r_0$ tal que $f(r_0) = 0$:
+    \begin{equation}
+    1 - \frac{r_S}{r_0} = 0 \implies r_0 = r_S = \frac{2GM}{c^2}.
+    \end{equation}
+    Calculando a derivada de $f(r)$ em relação a $r$ e avaliando-a sobre o horizonte de eventos $r = r_S$:
+    \begin{equation}
+    \frac{df}{dr} = \frac{r_S}{r^2} \implies \left. \frac{df}{dr} \right|_{r=r_S} = \frac{r_S}{r_S^2} = \frac{1}{r_S} = \frac{c^2}{2GM}.
+    \end{equation}
+    Substituindo este resultado na expressão da temperatura associada ao horizonte ($l \to r$ e $l_0 \to r_S$), obtemos a célebre \textbf{temperatura de Hawking-Bekenstein}:
+    \begin{equation}
+    k_B T_H = \frac{\hbar c}{4\pi} \left. \frac{df}{dr} \right|_{r=r_S} = \frac{\hbar c}{4\pi} \left( \frac{c^2}{2GM} \right) \implies k_B T_H = \frac{\hbar c^3}{8\pi G M}.
+    \end{equation}
+    Observa-se a profunda equivalência física entre os dois resultados: como a gravidade superficial de um buraco negro de Schwarzschild é $\kappa = \frac{GM}{r_S^2} = \frac{c^4}{4GM}$, a temperatura de Hawking pode ser escrita como $k_B T_H = \frac{\hbar \kappa}{2\pi c}$, exatamente análoga à temperatura de Unruh $k_B T = \frac{\hbar g}{2\pi c}$ pelo Princípio da Equivalência.
+\end{enumerate}
+
+\section{Conclusão}
+
+Ao longo deste trabalho, demonstramos como a Teoria da Relatividade Especial incorpora de maneira exata e elegante a descrição de movimentos acelerados. A distinção entre a aceleração coordenada $a = dv/dt$ (que tende a zero à medida que $v \to c$, garantindo que nenhuma partícula material atinja ou supere a velocidade da luz) e a aceleração própria $g = \gamma^3 a$ (sentida localmente pelo observador acelerado) permitiu equacionar problemas reais e fascinantes da física relativística, como viagens interestelares tripuladas sob gravidade artificial de $1g$ e a dinâmica de foguetes movidos a conversão de matéria em energia.
+
+Por fim, o estudo do movimento hiperbólico revelou que um observador uniformemente acelerado no espaço-tempo plano de Minkowski experimenta o surgimento de uma fronteira causal — o horizonte de Rindler — matematicamente análoga ao horizonte de eventos de um buraco negro de Schwarzschild, estabelecendo uma ponte direta entre a cinemática relativística, o Princípio da Equivalência e a termodinâmica quântica de buracos negros.
+
+\begin{thebibliography}{9}
+\bibitem{fonseca2020}
+C. H. d'Ávila Fonseca, \textit{Problemas de Fundamentos de Relatividade — Movimento Acelerado}, Notas de Aula, Universidade Federal de Minas Gerais (2020).
+
+\bibitem{taylor2000}
+E. F. Taylor, J. A. Wheeler, \textit{Exploring Black Holes: Introduction to General Relativity}, Addison-Wesley Longman, 1ª ed. (2000).
+
+\bibitem{padmanabhan2010}
+T. Padmanabhan, \textit{Gravitation: Foundations and Frontiers}, Cambridge University Press, Cap. 16 (2010).
+
+\bibitem{thorne1994}
+K. S. Thorne, \textit{Black Holes \& Time Warps: Einstein's Outrageous Legacy}, W. W. Norton \& Company (1994).
+\end{thebibliography}
+
+\end{document}
